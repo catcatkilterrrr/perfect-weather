@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Modal } from 'react-bootstrap'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
@@ -28,7 +29,8 @@ export default class CreatePiece extends Component {
       orb: "Sun",
       stars: 50,
       orbPos: 50,
-      wind: 50
+      wind: 50,
+      show: false,
     }
   }
 
@@ -58,14 +60,7 @@ export default class CreatePiece extends Component {
       .then(res => console.log(res.data));
 
      this.setState(this.state = {
-      name: '',
-      clouds: 50,
-      cloudsPos: 100,
-      rain: 50,
-      orb: "Sun",
-      stars: 50,
-      orbPos: 50,
-      wind: 50
+      show: true
     })
   }
 
@@ -91,25 +86,33 @@ export default class CreatePiece extends Component {
 			orbPos: e.target.value
 		})
   }
-  
+
   starsAttr(e) {
 		this.setState({
 			stars: e.target.value
 		})
 	}
-  
+
   windAttr(e) {
 		this.setState({
 			wind: e.target.value
 		})
   }
-  
+
   render() {
     const divStyle = {
       height: "25vh",
       overflow: "scroll"
     };
     return (<div className="form-wrapper">
+
+
+      <Modal show={this.state.show}>
+        <Modal.Header>Submission Recorded</Modal.Header>
+        <Modal.Body>Thanks for your submission!</Modal.Body>
+        <Modal.Footer>Bye!</Modal.Footer>
+      </Modal>
+
       <Canvas wind={this.state.wind} stars={this.state.stars} rain={this.state.rain} orb={this.state.orb} orbPos={this.state.orbPos} cloudsPos={this.state.cloudsPos} clouds={this.state.clouds} />
       <div style={divStyle}>
       <Form onSubmit={this.onSubmit}>
