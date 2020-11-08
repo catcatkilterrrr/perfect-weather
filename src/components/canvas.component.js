@@ -13,7 +13,7 @@ export default class Canvas extends React.Component {
       
       function initRain(c_p) {
         let ls = [];
-        let y = 150 + 150*(c_p/100);
+        let y = p.height/6 + (p.height/7)*(cp/100);
         for (let i = 0; i<100; i++ ) {
           let o = {
             length: p.random(10,30),
@@ -28,7 +28,7 @@ export default class Canvas extends React.Component {
       }
 
       function updateRain(rainObj, rainAttr, c_p, wind) {
-        let y = 170 + 150*(c_p/100);
+        let y = p.height/6 + (p.height/7)*(cp/100);
         let xoff = p.map(wind, 0, 100, -3, 3);
         for (let i=0;i<rainAttr;i++) {
           let obj = rainObj[i];
