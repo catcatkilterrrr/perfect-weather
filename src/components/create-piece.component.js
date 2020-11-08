@@ -35,7 +35,6 @@ export default class CreatePiece extends Component {
   }
 
   setOrb(e) {
-    console.log(e.target.value)
     this.setState({ orb: e.target.value })
   }
 
@@ -59,14 +58,14 @@ export default class CreatePiece extends Component {
     axios.post('/api/pieces/create-piece', attrsObject)
       .then(res => console.log(res.data));
 
-     this.setState(this.state = {
+     this.setState({
       show: true
     })
   }
 
   rainAttr(e) {
 		this.setState({
-			rain: 2*e.target.value
+			rain: e.target.value
 		})
   }
 
