@@ -68,8 +68,8 @@ export default class Canvas extends React.Component {
         for (let i=0; i<100; i++) {
           let cloud = {
             x_pos: p.random(0, p.width),
-            y_pos: 200 + 150*(cp/100),
-            ry: p.random(-100,100),
+            y_pos: p.height/6 + (p.height/7)*(cp/100),
+            ry: p.random(-p.height/8,p.height/8),
             r: p.random(50,200),
             maxa: p.random(155,255),
             a: 0,
@@ -88,15 +88,15 @@ export default class Canvas extends React.Component {
           }
           if (c.c == 0) {
             c.a += p.random(0.5,1);
-            c.y_pos = 200 + 150*(cp/100);
+            c.y_pos = p.height/6 + (p.height/7)*(cp/100);
           } else {
             c.a -= (0.1,0.5);
-            c.y_pos = 200 + 150*(cp/100);
+            c.y_pos = p.height/6 + (p.height/7)*(cp/100);
           }          
           if (c.a <= 0 && c.c == 1) {
             c.x_pos = p.random(0, p.width);
-            c.y_pos = 200 + 150*(cp/100);
-            c.ry = p.random(-100,100);
+            c.y_pos = p.height/6 + (p.height/7)*(cp/100);
+            c.ry = p.random(-p.height/8,p.height/8);
             c.a = 0;
             c.maxa = p.random(155,255);
             c.c = 0;
@@ -186,7 +186,11 @@ export default class Canvas extends React.Component {
       let stars;
 
       p.setup = () => {
-        p.createCanvas(p.windowWidth,p.windowHeight*0.75);
+        if (p.windowWidth>p.windowHeight) {
+          p.createCanvas(p.windowWidth,p.windowHeight*0.75);
+        } else {
+          p.createCanvas(p.windowWidth,p.windowWidth*1.425);
+        }       
         rain = initRain(this.props.cloudsPos);
         clouds = initClouds(this.props.cloudsPos);
         stars = initStars();
