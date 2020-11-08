@@ -9,6 +9,7 @@ export default class Canvas extends React.Component {
     }
   
     Sketch = (p) => {
+      let multiplier;
       
       function initRain(c_p) {
         let ls = [];
@@ -113,7 +114,7 @@ export default class Canvas extends React.Component {
           p.fill(225, 175, 105, c.a);
           p.noStroke()
        //   p.strokeWeight(1);
-          p.ellipse(c.x_pos, c.y_pos - c.ry, c.r, c.r);
+          p.ellipse(c.x_pos, c.y_pos - c.ry, multiplier*c.r, multiplier*c.r);
         }
       }
 
@@ -132,11 +133,11 @@ export default class Canvas extends React.Component {
         }
         p.push();
         p.translate(op[0],op[1]);
-        p.ellipse(0,0,200,200);
+        p.ellipse(0,0,multiplier*200,multiplier*200);
         p.translate(mx, my);
         for (let i=0; i < p.TWO_PI; i+= p.TWO_PI/12) {
           p.strokeWeight(1);
-          p.line(0, ls, 0, le);
+          p.line(0, multiplier*ls, 0, multiplier*le);
           p.rotate(p.TWO_PI/12);
         }
         p.pop();
@@ -188,8 +189,10 @@ export default class Canvas extends React.Component {
       p.setup = () => {
         if (p.windowWidth>p.windowHeight) {
           p.createCanvas(p.windowWidth,p.windowHeight*0.75);
+          multiplier = 1;
         } else {
           p.createCanvas(p.windowWidth,p.windowWidth*1.425);
+          multiplier = 0.6;
         }       
         rain = initRain(this.props.cloudsPos);
         clouds = initClouds(this.props.cloudsPos);
